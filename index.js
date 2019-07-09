@@ -7,14 +7,14 @@ const submitBtn = document.getElementById("submit");
 
 
 
-// this function valdiate Name field if "Enter" key was pressed 
+// this function valdiates Name field if "Enter" key was pressed 
 function validateName(event) {
     if (event.which === 13 || event.keyCode === 13) {
         nameValidation();
     };
 }
 
-// this function valdiate Address field if "Enter" key was pressed 
+// this function valdiates Address field if "Enter" key was pressed 
 
 function validateAddress(event) {
     if (event.which === 13 || event.keyCode === 13) {
@@ -27,7 +27,7 @@ function validateNameAndAddress() {
     if (nameValidation()) {
         if (addressValidation())
             return true;
-
+        else return false;
     } else return false;
 
 }
