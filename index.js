@@ -1,68 +1,35 @@
 const name = document.getElementById("name");
 
-const address = document.getElementById("address");
-
-const submitBtn = document.getElementById("submit");
+const searchBtn = document.getElementById("search");
 
 
 
 
-// this function valdiates Name field if "Enter" key was pressed 
-function validateName(event) {
-    if (event.which === 13 || event.keyCode === 13) {
-        nameValidation();
-    };
-}
+// this function 
+function searchUsers(event) {
 
-// this function valdiates Address field if "Enter" key was pressed 
-
-function validateAddress(event) {
-    if (event.which === 13 || event.keyCode === 13) {
-        addressValidation();
-    };
-}
-
-
-function validateNameAndAddress() {
-    if (nameValidation()) {
-        if (addressValidation())
-            return true;
-        else return false;
-    } else return false;
+    event.preventDefault();
+    return getUserList();
 
 }
 
 
-
-function nameValidation() {
+function getUserList() {
     const input = name.value;
-    if (input.length >= 5) {
-        return true;
-    } else {
-        alert("Name should be more than 5 characters long");
-        return false;
-    }
+
+    fetch(`https://api.github.com/search/users?q=${input}`)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (response) {
+            console.log(usersList = JSON.stringify(response));
+            document.write(usersList);
+
+        })
 }
 
 
 
-function addressValidation() {
-    const input = address.value;
-    if (input.length < 10) {
-        return true;
-    } else {
-        alert("Address should be less than 10 characters long");
-        return false;
-    };
-};
+name.addEventListener("keydown", searchUsers);
 
-
-
-
-
-
-name.addEventListener("keydown", validateName);
-
-address.addEventListener("keydown", validateAddress);
-
-submitBtn.addEventListener("click", validateNameAndAddress);
+searchBtn.addEventListener("click", searchUsers);
